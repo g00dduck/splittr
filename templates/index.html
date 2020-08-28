@@ -1,5 +1,4 @@
-{% extends "base.html" %}
-{% block title %}Break Up Your Playlists{% endblock %}
+{% extends "base_connected.html" %}
 {% block home_content %}Hello, {% if name %} {{ name }}{% else %} world{%endif%}!{% endblock %}
 {% block profile_content %}This is your profile{% if name %}, {{ name }}{%endif%}!{% endblock %}
 {% block messages_content %}This where your messages are{% if name %}, {{ name }}{%endif%}!{% endblock %}
