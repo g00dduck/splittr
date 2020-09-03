@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Session folders
+.flask_session/
+.spotify_caches/
+.flaskenv
+.env

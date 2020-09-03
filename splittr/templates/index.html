@@ -1,0 +1,31 @@
+{% extends "base_connected.html" %}
+{% block home_content %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Track ID</th>
+            <th>Danceability</th>
+            <th>Energy</th>
+            <th>Loudness</th>
+            <th>Tempo</th>
+            <th>Time Signature</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ info['id'] }}</td>
+            <td>{{ info['danceability'] }}</td>
+            <td>{{ info['energy'] }}</td>
+            <td>{{ info['loudness'] }}</td>
+            <td>{{ info['tempo'] }}</td>
+            <td>{{ info['time_signature'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block profile_content %}This is your profile{% if name %}, {{ name }}{%endif%}!{% endblock %}
+{% block messages_content %}This where your messages are{% if name %}, {{ name }}{%endif%}!{% endblock %}
+{% block settings_content %}This where you can adjust your settings{% if name %}, {{ name }}{%endif%}!{% endblock %}
