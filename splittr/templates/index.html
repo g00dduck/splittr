@@ -3,7 +3,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Track ID</th>
+            <th>Track Name</th>
             <th>Danceability</th>
             <th>Energy</th>
             <th>Loudness</th>
@@ -12,9 +12,9 @@
         </tr>
     </thead>
     <tbody>
-        {% for item in items %}
+        {% for info in items %}
         <tr>
-            <td>{{ info['id'] }}</td>
+            <td>{{ info['track']['name'] }}</td>
             <td>{{ info['danceability'] }}</td>
             <td>{{ info['energy'] }}</td>
             <td>{{ info['loudness'] }}</td>

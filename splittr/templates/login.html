@@ -58,7 +58,7 @@
     }
     {% endblock %}
     {% block html_body %}
-    <form class="form-signin text-center" action="{{ url_for('authorize') }}" method="post">
+    <form class="form-signin text-center" action="{{ url_for('connect') }}" method="post">
         <img class="mb-4" src="{{ url_for('static', filename='img/favicon-194x194.png') }}" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Splittr</h1>
         <h2 class="h4 mb-3 font-weight-normal">Split up your liked tracks!</h2>
