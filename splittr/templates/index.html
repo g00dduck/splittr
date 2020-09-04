@@ -1,9 +1,11 @@
 {% extends "base_connected.html" %}
 {% block home_content %}
-<table class="table">
-    <thead>
+<table class="table table-striped table-hover table-dark">
+    <thead class="thead-light">
         <tr>
             <th>Track Name</th>
+            <th></th>
+            <th>Duration (s)</th>
             <th>Danceability</th>
             <th>Energy</th>
             <th>Loudness</th>
@@ -14,12 +16,24 @@
     <tbody>
         {% for info in items %}
         <tr>
-            <td>{{ info['track']['name'] }}</td>
-            <td>{{ info['danceability'] }}</td>
-            <td>{{ info['energy'] }}</td>
-            <td>{{ info['loudness'] }}</td>
-            <td>{{ info['tempo'] }}</td>
-            <td>{{ info['time_signature'] }}</td>
+            <td>{{ info.name }}</td>
+            <td>
+                <a class="btn btn-primary" data-toggle="collapse" href="#track_{{ info.spotify_id }}" role="button" aria-expanded="false" aria-controls="track_{{ info.spotify_id }}">
+                    Track Preview
+                </a>
+                <div class="collapse" id="track_{{ info.spotify_id }}">
+                    <audio controls>
+                        <source src="{{ info.preview_url }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </td>
+            <td>{{ info.duration }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
         {% endfor %}
     </tbody>
