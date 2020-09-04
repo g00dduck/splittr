@@ -58,15 +58,45 @@ def create_app():
             # No code provided, returning to home
             return redirect('/')
 
-    @app.route('/display')
-    def display(authorized_sp):
-        tracks = authorized_sp.current_user_saved_tracks()
+    class LikedTrack():
+        spotify_id = None
+        name = None
+        preview_url = None
+        genres = None
+        tempo = None
+        time_signature = None
+        energy = None
+        loudness = None
+        duration = None
 
-        return render_template("index.html", items=tracks['items'])
+    @app.route('/display')
+    @app.route('/display/<offset>')
+    def display(authorized_sp=None, offset=0):
+        # Gets 50 tracks, starting with the given offset.
+        # In the index page, make a pagination item that, like the action for connect,
+        # renders this display with the given offset by every 50.
+        if authorized_sp is None:
+            authorized_sp = spotipy.Spotify(auth_manager=get_auth_manager())
+        saved_tracks_info = authorized_sp.current_user_saved_tracks(limit=50)
+        print(f"Given offset of {offset}!")
+        print(f"{saved_tracks_info['total']} total liked tracks for this user!!")
+        print(f"Looking at tracks {saved_tracks_info['offset']} through {len(saved_tracks_info['items'])}")
+
+        liked_tracks = []
+        for track in saved_tracks_info['items']:
+            l = LikedTrack()
+            l.spotify_id = track['track']['id']
+            l.name = track['track']['name']
+            l.preview_url = track['track']['preview_url']
+            l.duration = track['track']['duration_ms'] / 60
+            #print(f"\tTrack Name: {l.name}\tDuration: {l.duration}\tPreview URL: {l.preview_url}")
+            liked_tracks.append(l)
+
+        return render_template("index.html", items=liked_tracks)
 
     @app.route('/logoff')
     @app.route('/signout')
-    def log_off():
+    def logoff():
         os.remove(session_cache_path())
         session.clear()
         try:
